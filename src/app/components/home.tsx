@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import { TreeSidebar } from "./sidebar";
+import { ComponentEditor } from "./component-editor";
+import { ProjectSummary } from "./project-summary";
 
 export default function HomePage() {
   return (
@@ -36,34 +38,16 @@ export default function HomePage() {
 
         {/* RIGHT PANEL: Project Details & Calculation Engine */}
         <ResizablePanel defaultSize={75}>
-          <div className="flex h-full flex-col p-6 overflow-auto">
-            <div className="mb-6 flex items-end justify-between">
-              <div>
-                <h1 className="text-3xl font-bold">Component Details</h1>
-                <p className="text-muted-foreground">
-                  Manage tasks and view cost roll-ups.
-                </p>
-              </div>
+          <div className="flex h-full flex-col p-8 overflow-auto">
+            <ComponentEditor selectedNode={null} />
+            <ProjectSummary />
 
-              <div className="text-right">
-                <span className="text-sm text-muted-foreground uppercase font-bold">
-                  Total Estimate
-                </span>
-                <div className="text-2xl font-mono font-bold text-primary">
-                  $0.00
-                </div>
-              </div>
-            </div>
-
-            <Separator className="mb-6" />
-
-            {/* Placeholder for the Details Engine */}
-            <div className="grid gap-6">
-              <div className="rounded-xl border bg-card p-8 text-center">
-                <p className="text-muted-foreground italic">
-                  Select a component from the tree to start estimating.
-                </p>
-              </div>
+            {/* Optional: Add a "Save to Master" warning here */}
+            <div className="mt-auto pt-8">
+              <p className="text-[10px] text-muted-foreground border-l-2 border-amber-500 pl-3">
+                PROD TIP: Ensure your estimated time accounts for 2FA token
+                rotation and CI/CD maintenance.
+              </p>
             </div>
           </div>
         </ResizablePanel>
