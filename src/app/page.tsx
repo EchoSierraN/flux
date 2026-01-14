@@ -9,22 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Topbar from "./components/topbar";
 
 export default function ThemeAuditPage() {
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       {/* --- TOP BAR --- */}
-      <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary" />
-            <span className="text-xl font-bold tracking-tight">
-              Obsidian UI
-            </span>
-          </div>
-          <ThemeToggle />
-        </div>
-      </nav>
+      <Topbar />
 
       <main className="container mx-auto py-10 px-4 space-y-10">
         {/* --- HERO SECTION --- */}
