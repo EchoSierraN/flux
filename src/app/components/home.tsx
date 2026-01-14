@@ -1,12 +1,6 @@
 "use client";
 
 import * as React from "react";
-// import {
-//   ResizableHandle,
-//   ResizablePanel,
-//   ResizablePanelGroup,
-// } from "@/components/ui/resizable";
-import Topbar from "@/app/components/topbar";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -14,10 +8,6 @@ import {
 } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import { TreeSidebar } from "./sidebar";
-
-// These will be your future engine components
-// import { TreeVisualizer } from "@/components/tree/TreeVisualizer";
-// import { DetailsPanel } from "@/components/details/DetailsPanel";
 
 export default function HomePage() {
   return (
@@ -36,17 +26,12 @@ export default function HomePage() {
             </h2>
             <Separator className="my-4" />
 
-            {/* This is where react-arborist will eventually sit */}
             <div className="flex-1 overflow-auto rounded-md border border-dashed p-4">
               <TreeSidebar />
-              {/* <p className="text-xs text-muted-foreground">
-                [Flux Tree Visualizer Engine]
-              </p> */}
             </div>
           </div>
         </ResizablePanel>
 
-        {/* THE DRAGGABLE SEPARATOR */}
         <ResizableHandle withHandle />
 
         {/* RIGHT PANEL: Project Details & Calculation Engine */}
@@ -60,7 +45,6 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* This is a great spot for the "Safety" summary */}
               <div className="text-right">
                 <span className="text-sm text-muted-foreground uppercase font-bold">
                   Total Estimate
