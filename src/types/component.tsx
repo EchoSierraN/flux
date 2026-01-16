@@ -25,6 +25,7 @@ export interface Component {
 
 export interface ProjectData {
   projectName: string;
+  projectDescription: string;
   globalMultiplier: number;
   rootComponent: Component;
   currency: string;

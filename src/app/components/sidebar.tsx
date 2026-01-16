@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Tree } from "react-arborist";
 import { ChevronDown, ChevronRight, Box, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useFluxStore } from "@/store/useFluxStore";
 
 // Hardcoded Demo Data matching our ProjectData structure
 const initialData = [
@@ -37,6 +38,7 @@ const initialData = [
 
 export const TreeSidebar = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectComponent = useFluxStore((state) => state.selectComponent);
 
   return (
     <div className="h-full w-full select-none font-sans">
@@ -48,7 +50,7 @@ export const TreeSidebar = () => {
         indent={20}
         rowHeight={32}
         // overstep={10}
-        onSelect={(nodes) => setSelectedId(nodes[0]?.id || null)}
+        onSelect={(nodes) => selectComponent(nodes[0]?.id || null)}
       >
         {({ node, style, dragHandle }) => (
           <div
