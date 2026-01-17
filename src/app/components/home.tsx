@@ -1,6 +1,7 @@
 "use client";
 
-import * as React from "react";
+import { useEffect, useState, useRef } from "react";
+import { useFluxStore } from "@/store/useFluxStore";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -8,10 +9,45 @@ import {
 } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import { TreeSidebar } from "./sidebar";
-import { ComponentEditor } from "./component-editor";
+import { ProjectHeader } from "./project-header";
 import { ProjectSummary } from "./project-summary";
 
-export default function HomePage() {
+export default function Home() {
+  const [isHydrated, setIsHydrated] = useState(false);
+  const hasInitialized = useRef(false); // The Guard
+
+  const project = useFluxStore((state) => state.project);
+  const setProject = useFluxStore((state) => state.setProject);
+
+  useEffect(() => {
+    // 1. Mark as hydrated for Next.js safety
+    setIsHydrated(true);
+
+    // 2. Check the guard AND ensure project isn't already set
+    if (!hasInitialized.current && !project) {
+      hasInitialized.current = true; // Block future runs immediately
+
+      setProject({
+        projectName: "New Flux Project",
+        projectDescription: "Initial project description",
+        globalMultiplier: 1.0,
+        currency: "USD",
+        rootComponent: {
+          id: "root",
+          title: "Main Project",
+          instanceName: "Main Project",
+          description: "Root node",
+          tasks: [],
+          children: [],
+          type: "component",
+        },
+      });
+    }
+  }, [setProject, project]);
+
+  // Prevent hydration mismatch errors
+  if (!isHydrated) return null;
+
   return (
     <main className="h-[calc(100vh-64px)] w-full overflow-hidden">
       <ResizablePanelGroup direction="horizontal" className="w-full">
@@ -39,7 +75,8 @@ export default function HomePage() {
         {/* RIGHT PANEL: Project Details & Calculation Engine */}
         <ResizablePanel defaultSize={75}>
           <div className="flex h-full flex-col p-8 overflow-auto">
-            <ComponentEditor selectedNode={null} />
+            {/* <ComponentEditor selectedNode={null} /> */}
+            <ProjectHeader />
             <ProjectSummary />
 
             {/* Optional: Add a "Save to Master" warning here */}
